@@ -29,10 +29,10 @@ model House {
   user User @relation(fields: [userId], references: [id])
   number String
   payments Payment[]
-  owner_name String
-  owner_dni String
-  owner_email String
-  owner_phone String
+  ownerName String
+  ownerDni String
+  ownerEmail String
+  ownerPhone String
 }
 
 model Payment {
@@ -42,8 +42,8 @@ model Payment {
   house House @relation(fields: [houseId], references: [id])
   houseId Int
   date DateTime
-  total_bs Float
-  total_usd Float
+  totalBs Float
+  totalUsd Float
   ref String
 }
 
@@ -53,6 +53,6 @@ model Expense {
   user User @relation(fields: [userId], references: [id])
   concept String
   date DateTime
-  total_bs Float
-  total_usd Float
+  totalBs Float
+  totalUsd Float
 }
