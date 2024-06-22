@@ -11,7 +11,9 @@ export async function getAllUsers(req, res) {
 		return
 	}
 
-	res.json(users)
+	const filteredUsers = users.map((user) => exclude(user, ['password']))
+
+	res.json(filteredUsers)
 }
 
 export async function addUser(req, res) {
