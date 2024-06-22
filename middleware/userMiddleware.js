@@ -26,7 +26,10 @@ export const userExists = async (req, res, next) => {
 			},
 		})
 
-		if (!user) next()
+		if (!user) {
+			next()
+			return
+		}
 
 		res.status(400).json({
 			message: 'User already exist',
