@@ -22,7 +22,8 @@ export async function addUser(req, res) {
 	const newUser = await prisma.user.create({
 		data: cleanUserInfo,
 	})
-	res.status(201).json(newUser)
+	const filteredUser = exclude(newUser, ['password'])
+	res.status(201).json(filteredUser)
 }
 
 export async function getUser(req, res) {
