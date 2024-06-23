@@ -1,5 +1,4 @@
 import { prisma } from "../config/config.js"
-import { exclude } from "../middleware/GeneralMiddleware.js";
 
 export async function getHousesFromUser(req, res) {
     const houses = await prisma.house.findMany({

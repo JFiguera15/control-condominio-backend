@@ -1,20 +1,26 @@
+import { prisma } from '../config/config.js'
 
-
-app.get("/income", (req, res) => {
-    const sql = "SELECT * FROM income where condo = \'" + req.query.id + "\'"
-    connection.query(sql, function (err, result) {
-        if (err) throw err;
-        res.json(result);
+export async function addPayment(req, res) {
+    const newPayment = await prisma.payment.create({
+        data: req.body
     })
-})
+    res.status(201).json(newPayment)
+}
 
-app.post('/add_income', (req, res) => {
-    let data = req.body;
-    const sql = "INSERT INTO income VALUES (?, ?, ?, ?, ?, ?, ?)";
-    connection.query(sql,
-        [data.condo, data.house_number, data.month, data.year,
-        data.total_bs, data.total_usd, data.ref], function (err, result) {
-            if (err) throw err;
-            return res.json("Agregado correctamente")
-        });
-});
+export async function getHousePayments(req, res) {
+    const payments = await prisma.payment.findMany({
+        where: {
+            houseId: parseInt(req.params.id)
+        }
+    })
+    res.json(payments)
+}
+
+export async function getUserPayments(req, res) {
+    const payments = await prisma.payment.findMany({
+        where: {
+            userId: parseInt(req.params.id)
+        }
+    })
+    res.json(payments)
+}
