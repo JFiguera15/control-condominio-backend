@@ -10,7 +10,7 @@ export async function addExpense(req, res) {
 export async function getUserExpenses(req, res) {
     const expenses = await prisma.expense.findMany({
         where: {
-            userId: parseInt(req.params.id)
+            userId: parseInt(req.session.user.id)
         }
     })
     res.json(expenses)

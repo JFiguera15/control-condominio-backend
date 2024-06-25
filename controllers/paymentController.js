@@ -10,6 +10,7 @@ export async function addPayment(req, res) {
 export async function getHousePayments(req, res) {
     const payments = await prisma.payment.findMany({
         where: {
+            userId: parseInt(req.session.user.id),
             houseId: parseInt(req.params.id)
         }
     })
@@ -19,7 +20,7 @@ export async function getHousePayments(req, res) {
 export async function getUserPayments(req, res) {
     const payments = await prisma.payment.findMany({
         where: {
-            userId: parseInt(req.params.id)
+            userId: parseInt(req.session.user.id)
         }
     })
     res.json(payments)
