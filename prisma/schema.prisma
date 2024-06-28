@@ -14,45 +14,45 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String    @unique
   password String
-  houses House[]
+  houses   House[]
   payments Payment[]
   expenses Expense[]
 }
 
 model House {
-  id Int @id @default(autoincrement())
-  userId Int
-  user User @relation(fields: [userId], references: [id])
-  number String
-  payments Payment[]
-  ownerName String
-  ownerDni String
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  user       User      @relation(fields: [userId], references: [id])
+  number     String
+  payments   Payment[]
+  ownerName  String
+  ownerDni   String
   ownerEmail String
   ownerPhone String
 }
 
 model Payment {
-  id Int @id @default(autoincrement())
-  userId Int
-  user User @relation(fields: [userId], references: [id])
-  house House @relation(fields: [houseId], references: [id])
-  houseId Int
-  date DateTime
-  totalBs Float
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  user     User     @relation(fields: [userId], references: [id])
+  house    House    @relation(fields: [houseId], references: [id])
+  houseId  Int
+  date     DateTime
+  totalBs  Float
   totalUsd Float
-  ref String
+  ref      String   @unique
 }
 
 model Expense {
-  id Int @id @default(autoincrement())
-  userId Int
-  user User @relation(fields: [userId], references: [id])
-  concept String
-  date DateTime
-  totalBs Float
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  user     User     @relation(fields: [userId], references: [id])
+  concept  String
+  date     DateTime
+  totalBs  Float
   totalUsd Float
 }
