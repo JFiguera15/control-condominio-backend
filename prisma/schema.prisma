@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(uuid())
   name     String
   email    String    @unique
   password String
@@ -24,8 +24,8 @@ model User {
 }
 
 model House {
-  id         Int       @id @default(autoincrement())
-  userId     Int
+  id         String    @id @default(uuid())
+  userId     String
   user       User      @relation(fields: [userId], references: [id])
   number     String
   payments   Payment[]
@@ -36,11 +36,11 @@ model House {
 }
 
 model Payment {
-  id       Int      @id @default(autoincrement())
-  userId   Int
+  id       String   @id @default(uuid())
+  userId   String
   user     User     @relation(fields: [userId], references: [id])
   house    House    @relation(fields: [houseId], references: [id])
-  houseId  Int
+  houseId  String
   date     DateTime
   totalBs  Float
   totalUsd Float
@@ -48,8 +48,8 @@ model Payment {
 }
 
 model Expense {
-  id       Int      @id @default(autoincrement())
-  userId   Int
+  id       String   @id @default(uuid())
+  userId   String
   user     User     @relation(fields: [userId], references: [id])
   concept  String
   date     DateTime

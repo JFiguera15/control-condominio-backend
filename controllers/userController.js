@@ -18,7 +18,7 @@ export async function getAllUsers(req, res) {
 }
 
 export async function addUser(req, res) {
-	const salt = bcrypt.genSaltSync(process.env.SALT_ROUNDS)
+	const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS))
 	const hashedPassword = bcrypt.hashSync(req.body.password, salt)
 	// Remove confirmPassword field from body
 	const cleanUserInfo = exclude(req.body, ['confirmPassword'])
