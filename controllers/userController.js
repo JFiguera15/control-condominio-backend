@@ -33,7 +33,7 @@ export async function addUser(req, res) {
 export async function getUser(req, res) {
 	const user = await prisma.user.findFirst({
 		where: {
-			id: parseInt(req.params.id),
+			id: req.params.id,
 		},
 	})
 	const filteredUser = exclude(user, ['password'])
