@@ -1,4 +1,4 @@
-import { prisma } from '../config/config'
+import { prisma } from '../config/config.js'
 
 export const houseExistsForPayment = async (req, res, next) => {
 	try {
