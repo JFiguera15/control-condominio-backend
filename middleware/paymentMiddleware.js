@@ -2,7 +2,7 @@ import { prisma } from '../config/config.js'
 
 export const refExists = async (req, res, next) => {
 	try {
-		const ref = prisma.payment.findUnique({
+		const ref = await prisma.payment.findUnique({
 			where: {
 				ref: req.body.ref,
 			},
