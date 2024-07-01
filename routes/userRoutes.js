@@ -4,6 +4,7 @@ import {
 	getAllUsers,
 	getUser,
 	login,
+	logout,
 } from '../controllers/userController.js'
 import {
 	userDoesNotExist,
@@ -17,5 +18,6 @@ router.route('/').get(getAllUsers)
 router.route('/:id').get(getUser)
 router.route('/').post(userDoesNotExist, validateFields, addUser)
 router.route('/token').post(userExists, login)
+router.route('/clear').delete(logout)
 
 export default router

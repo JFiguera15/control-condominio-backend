@@ -60,9 +60,27 @@ export async function login(req, res) {
 		})
 		res
 			.status(200)
-			.cookie('access_token', token, { httpOnly: true })
-			.json({ token: token })
+			.cookie('access_token', token, {
+				sameSite: 'strict',
+				path: '/',
+				expires: new Date(new Date().getTime() + 1000 * 60 * 60),
+				httpOnly: true,
+				secure: process.env.NODE_ENV == 'production',
+			})
+			.json({
+				message: 'Cookie added',
+			})
 	} catch (error) {
 		res.status(401).send(error.message)
+	}
+}
+
+export async function logout(req, res) {
+	try {
+		res.status(202).clearCookie('access_token').json({
+			message: 'Cookie cleared',
+		})
+	} catch (error) {
+		console.log(error.message)
 	}
 }
